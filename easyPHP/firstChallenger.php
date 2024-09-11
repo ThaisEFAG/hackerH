@@ -61,45 +61,36 @@ fclose($fptr);
  */
 
 function plusMinus($arr) {
-   echo "<pre>";
-print_r($arr);
-echo "</pre>";
+        $arrReturn = [
+        $percPosiNum = 0,
+        $percNegaNum = 0,
+        $percZeroNum = 0
+    ];
 
-function plusMinus($arr) {
-   $arrResp = [];
-   
-  echo "<pre>";
-print_r($arrResp);
-echo "</pre>";
 
-  $decNumPositive = 0;
-   $decNumNegative = 0;
-   $decNumZero = 0;
-   
-        for($i = 0; $i < count($arr); $i++){
-         
-            if($arr[$i] > 0){
-           
-             $porcentagem = $i / count($arr) / $i;
-               $decNumPositive += $porcentagem;    
-               echo("$decNumPositive, ");
-                  
-                }
-                if($arr[$i] < 0){
-                
-                $porcentagem = ($i + 1) / count($arr) / ($i + 1);
-                $decNumNegative += $porcentagem;
-                
-                } 
-                else{
-                    $decNumZero = $i / count($arr) / $i;
-                    echo("$decNumZero, ");
-                    
-                    
-                }
-            
-        };
+    $decPercIndexArr = 1 / count($arr);
 
+    for ($i = 0; $i < count($arr); $i++) {
+
+        if ($arr[$i] > 0) {
+            $percPosiNum += $decPercIndexArr;
+            $arrReturn[0] = $percPosiNum;
+        }
+        if ($arr[$i] < 0) {
+            $percNegaNum += $decPercIndexArr;
+            $arrReturn[1] = $percNegaNum;
+        }
+        if ($arr[$i] === 0) {
+            $percZeroNum += $decPercIndexArr;
+            $arrReturn[2] = $percZeroNum;
+        }
+    }
+    ksort($arrReturn);
+    
+    foreach ($arrReturn as $value) {
+
+        echo (number_format($value, 6)) . "\n";
+    }
 }
 
 $n = intval(trim(fgets(STDIN)));
